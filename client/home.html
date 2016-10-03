@@ -1,0 +1,50 @@
+<template name="Home">	
+	<div class="row">
+	  <div class="pull-right"> 
+				  	{{> EasySearch.Input index=PeopleIndex attributes=inputAttributes }}
+		</div>
+	</div>		
+	<br>
+  	<div class="row">
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">    
+            	<h3 class="panel-title">Users</h3>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr class="filters">
+                     <th>Full Name</th>
+				      <th>Birthday</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+				   {{#EasySearch.Each index=PeopleIndex }}
+				    <tr>
+				      <td> <a href="../home/profile/{{_id}}"><i class="glyphicon glyphicon-pencil"></i> {{name}}</a></td>
+				      <td>{{dateofbirth}}</td>
+				    </tr>
+       				{{/EasySearch.Each}}
+       				 {{#EasySearch.IfNoResults index=PeopleIndex }}
+					     <td align="center">No results found</td>
+					 {{/EasySearch.IfNoResults}}
+					 {{> EasySearch.Pagination index=PeopleIndex maxPages=2 }}
+  					 {{! > EasySearch.LoadMore index=PeopleIndex }}
+				  </tbody>
+            </table>
+
+						  
+        </div>
+    </div>
+
+      {{#EasySearch.IfInputEmpty index=PeopleIndex}}
+						<!--     <div class="padded examples">For example "Grace Gaga"</div> -->
+		{{else}}
+				{{#if resultsCount}}
+						<div class="padded count-results">{{resultsCount}} results found.</div>
+				{{/if}}
+		{{/EasySearch.IfInputEmpty}}
+</template>
+
+
+

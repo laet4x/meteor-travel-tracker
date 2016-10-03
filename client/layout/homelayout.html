@@ -1,0 +1,106 @@
+<head>
+  <title>Travel Tracker</title>
+</head>
+
+<template name="homelayout">
+{{>homelayout_css}}
+<!-- Yield Nav -->
+		{{>yield "nav"}}
+
+		 <div class="container">
+		 	<div class="row">
+            	<h1 align="center"></h1>
+            </div>
+            <div class="row">
+		        <!-- Yield Templates -->
+		        {{>yield}} 
+		    </div>   
+    	</div>
+ 		
+</template>
+
+<template name = 'homelayout_css'>
+<style>
+body,html {
+  position: absolute;
+  min-height: 100%;
+  width: 100%;
+  background-size: 100% auto;
+  padding-top: 20px;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+}
+.form-background{
+   background-color: #F7F7F7;
+    /* just in case there no content*/
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}  font-size: 16px;
+}
+
+.filterable {
+    margin-top: 15px;
+}
+.filterable .panel-heading .pull-right {
+    margin-top: -20px;
+}
+.filterable .filters input[disabled] {
+    background-color: transparent;
+    border: none;
+    cursor: auto;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]::-moz-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]:-ms-input-placeholder {
+    color: #333;
+}
+
+.form-register {
+  max-width: 630px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-register .form-register-heading,
+.form-register .checkbox {
+  margin-bottom: 10px;
+}
+.form-register .checkbox {
+  font-weight: normal;
+}
+.form-register .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-register .form-control:focus {
+  z-index: 2;
+}
+.form-register input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-register input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>
+</template>
