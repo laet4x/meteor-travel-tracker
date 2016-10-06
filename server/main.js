@@ -52,3 +52,10 @@ Meteor.publish("userProfile", function(id){
         return People.find(user._id);
     }
 });
+
+Meteor.publish('tracklist', function() {
+  var loggedInUser = this.userId;
+   if (Roles.userIsInRole(loggedInUser,['admin'],'default-group')) {
+    return TrackList.find();
+    }
+});
