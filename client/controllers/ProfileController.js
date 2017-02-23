@@ -15,7 +15,7 @@ this.ProfileController = RouteController.extend({
 	},
 	//wait for subscription
     waitOn:function(){
-        return Meteor.subscribe("userProfile",this.params._id);
+        return Meteor.subscribe("userList",this.params._id);
     },
     //data user in profile Controller
     data:function(){

@@ -51,6 +51,7 @@ Template.Home.helpers({
             rowsPerPage: 10,
             showFilter: true,
             fields: [ 
+            		  { key: '_id', label: 'Action' ,tmpl: Template.editables },
             		  { key: 'full_name', label: 'Full Name'},
                       { key: 'date_entry', label: 'Date of Entry'},
                       { key: 'origin', label: 'Origin'},

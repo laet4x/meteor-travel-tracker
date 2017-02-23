@@ -5,14 +5,14 @@
             <center><h1>Travel Tracker</h1></center>
               <div class="container">
                    <!-- {{#if Template.subscriptionsReady}} -->
-                          <h2 class="form-register-heading">User Profile</h2>
                                <div class="panel-body">
 
                                 <div class="col-lg-5  form-background">
-                                  {{#with userProfile}}
-                                    Name: {{name}}<br>
-                                    Date of Birth: {{dateofbirth}}<br>
-                                    Address: {{address}}<br>
+                                  {{#with userTrackList}}
+                                    Name: {{full_name}}<br>
+                                    Date of Entry: {{date_entry}}<br>
+                                    Origin: {{origin}}<br>
+                                    Airport Entry: {{airport_entry}}<br>
                                   {{/with}}
                                 </div><!-- /col-6 -->
 
@@ -20,41 +20,47 @@
                                 </div><!-- /col-6 -->
 
                                 <div class="col-lg-5  form-background">
+                                {{#with userTrackList}}
                                 <form id="profile_form" class="form-register" role="form">
+
                                 <div class="row">
-                                    <div class="form-group col-lg-8">
+                                    <div class="form-group col-xs-12">
+                                      <label for="inputPassword" class="sr-only">Full Name</label>
+                                      <input type="text" id="full_name" class="form-control" value="{{full_name}}" required>
+                                  </div>
+                                  </div>
+
+                                <div class="row">
+                                    <div class="form-group col-xs-10">
                                       <label for="Fullname" class="sr-only">Date of Entry</label>
-                                      <input type="datetime-local" id="date_entry" class="form-control" placeholder="Date of Entry" required autofocus>
+                                      <input type="text" id="date_entry" class="form-control" value="{{date_entry}}" required autofocus>
                                      </div>
                                   </div>
 
                                   <div class="row">
-                                    <div class="form-group col-lg-10">
+                                    <div class="form-group col-xs-12">
                                       <label for="inputPassword" class="sr-only">Origin</label>
-                                      <input type="text" id="origin" class="form-control" placeholder="Origin" required>
+                                      <input type="text" id="origin" class="form-control" value="{{origin}}" required>
                                   </div>
                                   </div>
 
                                   <div class="row">
-                                    <div class="form-group col-lg-10">
+                                    <div class="form-group col-xs-12">
                                       <label for="inputPassword" class="sr-only">Airport of Entry</label>
-                                      <input type="text" id="airport_entry" class="form-control" placeholder="Airport of Entry" required>
+                                      <input type="text" id="airport_entry" class="form-control" value="{{airport_entry}}" required>
                                   </div>
                                   </div>
                                   <div class="row">
-                                    <div class="form-group col-lg-4">
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">Submit</button>
+                                    <div class="form-group col-xs-6">
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">Update</button>
                                   </div>
                                   </div>
+
                                  </form>
+                                   {{/with}}
                                 </div><!-- /col-6 -->
                               </div><!-- /panel -->
                               <br>
-                              <div class="panel-body form-background">
-                                <div class="row">
-                                     {{> reactiveTable class="table table-bordered" collection=collection fields=fields settings=tracklistTable}}
-                                </div>
-                              </div>
                        <!--  {{else}}
                          <center>  {{> loader}} </center>
                        {{/if}}       -->

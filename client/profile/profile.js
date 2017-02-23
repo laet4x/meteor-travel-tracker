@@ -8,13 +8,9 @@ import { People} from '../../lib/collection.js';*/
 import { $ } from 'meteor/jquery';
 
 Template.Profile.onCreated(function helloOnCreated() {
-  // counter starts at 0
   var controller = Iron.controller();
   var id= controller.state.get('id');
-  this.profile = this.subscribe("userProfile",id);
-  var user = this.data;
-  this.filter = new ReactiveTable.Filter('filter_'+user, ["user_id"]);
-  this.filter.set(user);
+  this.profile = this.subscribe("userList",id);
 });
 
 
@@ -35,6 +31,7 @@ Template.Profile.events({
 		e.preventDefault();
 		pageSession.set("errorMessage", "");
 		var submit_button = $(t.find(":submit"));
+		var full_name = t.find('#full_name').value;
 		var date_entry = t.find('#date_entry').value;
 		var origin = t.find('#origin').value;
 		var airport_entry = t.find('#airport_entry').value;
@@ -42,10 +39,11 @@ Template.Profile.events({
 		var controller = Iron.controller();
 	    var id= controller.state.get('id');
 
-	    console.log(airport_entry);
+	    console.log(id);
 
 		let options = {
-			user_id:id,
+			id:id,
+			full_name:full_name,
 			date_entry:date_entry,
 			origin:origin,
 			airport_entry:airport_entry
@@ -53,16 +51,16 @@ Template.Profile.events({
 
 		submit_button.button("loading");
 		
-		Meteor.call('trackPeople', options, function(err) {
+		Meteor.call('editTrackList', options, function(err) {
 			submit_button.button("reset");
 			if (err)
 			{
-				console.log('Entry Error');
+				console.log('Update Error');
 				pageSession.set("errorMessage", "Error");
 				return false;
 			}else {
-			 	console.log('Entry Sucess');
-			 	pageSession.set("errorMessage", "Entry Sucess");
+			 	console.log('Update Sucess');
+			 	pageSession.set("errorMessage", "Update Sucess");
 			    Router.go("/home/profile/" + id);
 			}
 		});
@@ -74,31 +72,14 @@ Template.Profile.helpers({
 	errorMessage: function() {
 	  return pageSession.get("errorMessage");
 	},
-	userProfile: function() {
+	userTrackList: function() {
 	    var controller = Iron.controller();
 	    var id= controller.state.get('id');
-        return People.findOne({
+        return TrackList.findOne({
             _id:id
         });
 	 },
 	subscription: function() {
     	return Template.instance().profile.ready();
- 	 },
-    tracklistTable: function () {
-
-   	 	var controller = Iron.controller();
-	    var id= controller.state.get('id');
-
-	    console.log(id);
-        return {
-            collection: TrackList,
-            rowsPerPage: 10,
-            showFilter: true,
-            filters: ["filter_"+id],
-            fields: [ 
-                      { key: 'date_entry', label: 'Date of Entry'},
-                      { key: 'origin', label: 'Origin'},
-                      { key: 'airport_entry', label: 'Airport of Entry' }]
-        };
-    }
+ 	 }
 });
